@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Parameter;
 
+/**
+ * 参数解析器接口
+ */
 public interface ParameterResolver {
     /**
      * 判断该解析器是否支持当前参数

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Parameter;
 
+/**
+ * 路径变量解析器
+ */
 public class PathVariableParameterResolver implements ParameterResolver {
     @Override
     public boolean supports(Parameter parameter) {

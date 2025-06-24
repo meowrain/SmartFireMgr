@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Parameter;
 
+/**
+ * 这个类是一个参数解析器，专门负责在Controller方法中自动注入 HttpServletResponse 对象。
+ */
 public class ResponseParameterResolver implements ParameterResolver {
     @Override
     public boolean supports(Parameter parameter) {

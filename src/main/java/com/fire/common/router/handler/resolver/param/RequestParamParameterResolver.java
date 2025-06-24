@@ -23,7 +23,6 @@ public class RequestParamParameterResolver implements ParameterResolver {
         RequestParam annotation = parameter.getAnnotation(RequestParam.class);
         String paramName = annotation.value();
         String paramValue = request.getParameter(paramName);
-        
         if (paramValue == null) {
             if (annotation.required()) {
                 throw new IllegalArgumentException("Required parameter '" + paramName + "' is missing");
