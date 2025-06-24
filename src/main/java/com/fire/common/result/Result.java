@@ -1,5 +1,7 @@
 package com.fire.common.result;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fire.util.JacksonHolderSingleton;
 
 import java.io.Serializable;
 
@@ -53,4 +55,7 @@ public class Result<T> implements Serializable {
         return SUCCESS_CODE.equals(code);
     }
 
+    public String toJsoString() throws JsonProcessingException {
+        return JacksonHolderSingleton.getObjectMapper().writeValueAsString(this);
+    }
 }

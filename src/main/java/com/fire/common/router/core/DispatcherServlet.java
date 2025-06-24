@@ -3,6 +3,7 @@ package com.fire.common.router.core;
 import com.fire.common.router.enums.HttpMethod;
 import com.fire.common.router.handler.HandlerInvoker;
 import com.fire.common.router.handler.HandlerMethod;
+import com.fire.common.router.interceptor.GlobalExceptionInterceptor;
 import com.fire.common.router.interfaces.Controller;
 import com.fire.common.router.interfaces.RequestMapping;
 import com.fire.common.router.interfaces.ResponseBody;
@@ -23,7 +24,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * DispatcherServlet	请求分发器
+ * DispatcherServlet 请求分发器
  */
 public class DispatcherServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -35,13 +36,13 @@ public class DispatcherServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         // 初始化路由匹配引擎，可以往里面注册路由
         this.router = new Router();
-        //初始化方法调用器
+        // 初始化方法调用器
         this.handlerInvoker = new HandlerInvoker();
 
         // 注册拦截器（类似Gin的中间件）
         this.handlerInvoker.addInterceptor(new CorsInterceptor());
         this.handlerInvoker.addInterceptor(new LoggingInterceptor());
-
+        this.handlerInvoker.addInterceptor(new GlobalExceptionInterceptor());
         // 从web.xml获取扫描包路径
         String scanPackage = config.getInitParameter("scanPackage");
 
@@ -68,7 +69,6 @@ public class DispatcherServlet extends HttpServlet {
             if (method.isAnnotationPresent(RequestMapping.class)) {
                 // 提取@RequestMapping
                 RequestMapping mapping = method.getAnnotation(RequestMapping.class);
-                //TODO: 一会儿看原理
                 HandlerMethod handler = new HandlerMethod(controllerInstance, method);
                 // 添加路由到router中。请求方法（get,post,update...）/path 还有handler
                 router.addRoute(mapping.method(), mapping.path(), handler);
@@ -99,15 +99,21 @@ public class DispatcherServlet extends HttpServlet {
         HttpMethod method = HttpMethod.valueOf(req.getMethod().toUpperCase());
         // 使用 Router 根据请求方法和路径查找匹配的路由（Handler 和路径变量）
         Optional<RouteMatch> routeMatch = router.findRoute(method, path);
-
         if (routeMatch.isPresent()) {
-            // 如果找到了匹配的路由
+            // 如果找到了匹配的路由，直接调用handlerInvoker
+            // 异常处理交给GlobalExceptionInterceptor处理
             try {
-                // 通过 handlerInvoker 调用实际的处理方法
                 handlerInvoker.invoke(req, resp, routeMatch.get());
             } catch (Exception e) {
-                log.error("Server error while handling request: {}", e.getMessage(), e);
-                handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Error: " + e.getMessage());
+                // 这里不应该捕获异常，但为了防止异常逃逸到容器层，做最后的兜底处理
+                // 正常情况下，异常应该已经被GlobalExceptionInterceptor处理了
+                if (!resp.isCommitted()) {
+                    log.error("异常未被拦截器处理，进行兜底处理: {}", e.getMessage(), e);
+                    handleError(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Error: " + e.getMessage());
+                } else {
+                    // 响应已经被拦截器处理，这是正常情况，使用DEBUG级别
+                    log.debug("响应已由拦截器处理完成: {}", e.getClass().getSimpleName());
+                }
             }
         } else {
             handleError(resp, HttpServletResponse.SC_NOT_FOUND, "Not Found: " + method + " " + path);

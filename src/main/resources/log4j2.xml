@@ -2,19 +2,47 @@
 <Configuration status="WARN">
     <!-- 定义日志格式 -->
     <Appenders>
-        <!-- 控制台输出 -->
-        <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        <!-- 控制台输出 - 高级彩色方案 -->
+        <Console name="ColorfulConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false">
+                <pattern>%style{%d{yyyy-MM-dd HH:mm:ss}}{blue} [%style{%t}{magenta}]
+                    %highlight{%-5level}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green,
+                    DEBUG=cyan, TRACE=white} %style{%logger{36}}{cyan} - %style{%msg}{white}%n</pattern>
+            </PatternLayout>
         </Console>
 
+        <!-- 控制台输出 - 简洁彩色方案 -->
+        <Console name="SimpleColorConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false">
+                <pattern>%d{HH:mm:ss.SSS} %highlight{%-5level} %style{%logger{20}}{bright,cyan} -
+                    %msg%n</pattern>
+            </PatternLayout>
+        </Console>
+
+
+        <!-- 文件输出（无颜色） -->
+        <File name="FileAppender" fileName="logs/app.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+        </File>
     </Appenders>
 
     <!-- 日志器 -->
     <Loggers>
+        <!-- 特定包的日志配置 -->
+        <Logger name="com.fire" level="debug" additivity="false">
+            <AppenderRef ref="ColorfulConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+        </Logger>
+
+        <!-- 数据库相关日志 -->
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="SimpleColorConsoleAppender" />
+        </Logger>
+
         <!-- 默认日志器 -->
         <Root level="info">
-            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="ColorfulConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
         </Root>
-
     </Loggers>
 </Configuration>

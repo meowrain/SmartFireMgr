@@ -7,6 +7,8 @@ import com.fire.common.router.interfaces.RequestParam;
 import com.fire.common.router.interfaces.RequestBody;
 import com.fire.common.router.interfaces.ResponseBody;
 import com.fire.common.router.enums.HttpMethod;
+import com.fire.common.errorcode.BaseErrorCode;
+import com.fire.common.exceptions.ClientException;
 import com.fire.common.result.Result;
 import com.fire.common.result.ResultBuilder;
 import com.fire.pojo.User;
@@ -99,6 +101,13 @@ public class TestController {
         result.put("data", Arrays.asList("结果1", "结果2", "结果3"));
 
         return ResultBuilder.success(result);
+    }
+
+    @RequestMapping(path = "/test/exception", method = HttpMethod.GET)
+    @ResponseBody
+    public Result<String> throwException() {
+        // 模拟抛出异常
+        throw new ClientException("主动错误", BaseErrorCode.CLIENT_ERROR);
     }
 
     // 7. POST请求处理JSON数据
