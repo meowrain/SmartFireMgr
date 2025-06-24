@@ -18,11 +18,22 @@ load-on-startup: 值为 1，表示服务器启动时就加载这个 Servlet -->
             <param-value>com.fire.controller</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
-    </servlet>
-
+    </servlet>    <!-- 为API路径配置多个映射，避免拦截静态资源 -->
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/test/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/ping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/diagnostic</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

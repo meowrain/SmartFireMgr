@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ResponseBody 测试页面</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .test-section h3 {
+            margin-top: 0;
+            color: #555;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .response {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+
+        .error {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+
+        .input-section {
+            margin: 10px 0;
+        }
+
+        input,
+        textarea {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 80px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>@ResponseBody 注解测试页面</h1>
+
+        <!-- 添加调试信息 -->
+        <div class="test-section">
+            <h3>🔧 调试信息</h3>
+            <div id="debug-info" class="response">
+                <strong>当前URL:</strong> <span id="current-url"></span><br>
+                <strong>基础路径:</strong> <span id="base-path"></span><br>
+                <strong>状态:</strong> <span id="connection-status">检查中...</span>
+            </div>
+            <button onclick="checkConnection()">检查连接</button>
+            <button onclick="testBasicEndpoints()">测试基础端点</button>
+        </div>
+
+        <!-- 基本测试 -->
+        <div class="test-section">
+            <h3>1. 基本用法测试</h3>
+            <button onclick="testApi('/test/simple')">简单数据</button>
+            <button onclick="testApi('/test/user')">用户对象</button>
+            <button onclick="testApi('/test/result')">Result包装</button>
+            <button onclick="testApi('/test/users')">用户列表</button>
+            <div id="basic-response" class="response"></div>
+        </div>
+
+        <!-- 参数测试 -->
+        <div class="test-section">
+            <h3>2. 参数处理测试</h3>
+            <div class="input-section">
+                <input type="number" id="userId" placeholder="用户ID" value="123">
+                <button onclick="testUserById()">根据ID获取用户</button>
+            </div>
+            <div class="input-section">
+                <input type="text" id="keyword" placeholder="搜索关键词" value="测试">
+                <input type="number" id="page" placeholder="页码" value="1">
+                <input type="number" id="size" placeholder="页大小" value="10">
+                <button onclick="testSearch()">搜索测试</button>
+            </div>
+            <div id="param-response" class="response"></div>
+        </div>
+
+        <!-- POST测试 -->
+        <div class="test-section">
+            <h3>3. POST请求测试</h3>
+            <div class="input-section">
+                <textarea id="userData" placeholder="用户数据JSON">{"name": "测试用户", "email": "test@example.com"}</textarea>
+                <button onclick="testCreateUser()">创建用户</button>
+            </div>
+            <div id="post-response" class="response"></div>
+        </div>
+
+        <!-- 错误处理测试 -->
+        <div class="test-section">
+            <h3>4. 错误处理测试</h3>
+            <button onclick="testApi('/test/error/404')">404错误</button>
+            <button onclick="testApi('/test/error/500')">500错误</button>
+            <button onclick="testApi('/test/error/400')">400错误</button>
+            <button onclick="testApi('/test/error/ok')">正常响应</button>
+            <div id="error-response" class="response"></div>
+        </div>
+
+        <!-- 特殊情况测试 -->
+        <div class="test-section">
+            <h3>5. 特殊情况测试</h3>
+            <button onclick="testApi('/test/null')">null值测试</button>
+            <button onclick="testApi('/test/complex')">复杂对象</button>
+            <button onclick="testApi('/test/performance')">性能测试</button>
+            <div id="special-response" class="response"></div>
+        </div>
+
+        <!-- 对比测试 -->
+        <div class="test-section">
+            <h3>6. 对比测试（非@ResponseBody）</h3>
+            <button onclick="testApi('/test/html')">HTML响应</button>
+            <button onclick="testApi('/test/manual-json')">手动JSON</button>
+            <div id="compare-response" class="response"></div>
+        </div>
+    </div>
+    <script>
+        // 全局变量
+        let basePath = '';
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('@ResponseBody测试页面已加载');
+            initializePage();
+        });
+
+        // 初始化页面
+        function initializePage() {
+            // 获取当前路径信息
+            const currentUrl = window.location.href;
+            basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+
+            document.getElementById('current-url').textContent = currentUrl;
+            document.getElementById('base-path').textContent = basePath;
+
+            // 自动检查连接
+            checkConnection();
+        }        // 检查服务器连接
+        function checkConnection() {
+            document.getElementById('connection-status').textContent = '检查中...';
+
+            // 测试基本连接 - 使用绝对路径
+            fetch('/ping')
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('connection-status').innerHTML =
+                            '✅ 连接正常 (HTTP ' + response.status + ')';
+                        return response.json();
+                    } else {
+                        throw new Error('HTTP ' + response.status + ' ' + response.statusText);
+                    }
+                })
+                .then(data => {
+                    console.log('Ping响应:', data);
+                })
+                .catch(error => {
+                    // 如果绝对路径失败，尝试相对路径
+                    fetch(basePath + '/ping')
+                        .then(response => {
+                            if (response.ok) {
+                                document.getElementById('connection-status').innerHTML =
+                                    '✅ 连接正常 (HTTP ' + response.status + ')';
+                                return response.json();
+                            } else {
+                                throw new Error('HTTP ' + response.status + ' ' + response.statusText);
+                            }
+                        })
+                        .catch(error2 => {
+                            document.getElementById('connection-status').innerHTML =
+                                '❌ 连接失败: ' + error.message + ' / ' + error2.message;
+                            console.error('连接测试失败:', error, error2);
+                        });
+                });
+        }
+
+        // 测试基础端点
+        function testBasicEndpoints() {
+            const endpoints = ['/', '/ping', '/diagnostic'];
+            let results = '基础端点测试结果:\n\n';
+
+            Promise.all(endpoints.map(endpoint => {
+                return fetch(basePath + endpoint)
+                    .then(response => ({
+                        endpoint: endpoint,
+                        status: response.status,
+                        statusText: response.statusText,
+                        contentType: response.headers.get('content-type')
+                    }))
+                    .catch(error => ({
+                        endpoint: endpoint,
+                        error: error.message
+                    }));
+            })).then(responses => {
+                responses.forEach(resp => {
+                    if (resp.error) {
+                        results += `❌ ${resp.endpoint}: ${resp.error}\n`;
+                    } else {
+                        results += `✅ ${resp.endpoint}: HTTP ${resp.status} ${resp.statusText}\n`;
+                    }
+                });
+
+                document.getElementById('debug-info').textContent = results;
+            });
+        }        // 通用API测试函数
+        function testApi(url, method = 'GET', data = null, responseElementId = null) {
+            // 直接使用URL，不添加basePath（因为我们使用的是绝对路径）
+            const fullUrl = url;
+            const startTime = Date.now();
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            };
+
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            fetch(fullUrl, options)
+                .then(response => {
+                    const endTime = Date.now();
+                    const duration = endTime - startTime;
+
+                    return response.text().then(text => {
+                        let result = `请求URL: ${fullUrl}\n`;
+                        result += `HTTP ${response.status} ${response.statusText}\n`;
+                        result += `Content-Type: ${response.headers.get('content-type')}\n`;
+                        result += `响应时间: ${duration}ms\n\n`;
+
+                        // 尝试格式化JSON
+                        try {
+                            const jsonData = JSON.parse(text);
+                            result += JSON.stringify(jsonData, null, 2);
+                        } catch (e) {
+                            result += text;
+                        }
+
+                        return {
+                            formatted: result,
+                            success: response.ok
+                        };
+                    });
+                })
+                .then(data => {
+                    const elementId = responseElementId || getResponseElementId(url);
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.textContent = data.formatted;
+                        element.className = `response ${data.success ? 'success' : 'error'}`;
+                    }
+                })
+                .catch(error => {
+                    const elementId = responseElementId || getResponseElementId(url);
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.textContent = `请求失败: ${error.message}\n请求URL: ${fullUrl}`;
+                        element.className = 'response error';
+                    }
+                });
+        }
+
+        // 根据URL确定响应显示元素
+        function getResponseElementId(url) {
+            if (url.includes('/test/user') || url.includes('/test/simple') || url.includes('/test/result')) {
+                return 'basic-response';
+            } else if (url.includes('/test/error')) {
+                return 'error-response';
+            } else if (url.includes('/test/null') || url.includes('/test/complex') || url.includes('/test/performance')) {
+                return 'special-response';
+            } else if (url.includes('/test/html') || url.includes('/test/manual')) {
+                return 'compare-response';
+            } else {
+                return 'param-response';
+            }
+        }        // 根据ID获取用户
+        function testUserById() {
+            const userId = document.getElementById('userId').value;
+            testApi(`/test/user/${userId}`, 'GET', null, 'param-response');
+        }
+
+        // 搜索测试
+        function testSearch() {
+            const keyword = document.getElementById('keyword').value;
+            const page = document.getElementById('page').value;
+            const size = document.getElementById('size').value;
+            const url = `/test/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=${size}`;
+            testApi(url, 'GET', null, 'param-response');
+        }
+
+        // 创建用户测试
+        function testCreateUser() {
+            try {
+                const userData = JSON.parse(document.getElementById('userData').value);
+                testApi('/test/user', 'POST', userData, 'post-response');
+            } catch (e) {
+                document.getElementById('post-response').textContent = `JSON格式错误: ${e.message}`;
+                document.getElementById('post-response').className = 'response error';
+            }
+        }
+    </script>
+</body>
+
+</html>

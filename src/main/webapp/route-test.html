@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由测试页面</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .test-link {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .test-link:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔥 智慧消防系统 - 路由测试</h1>
+
+        <div class="section">
+            <h3>📋 基本信息</h3>
+            <p><strong>当前时间:</strong> <span id="current-time"></span></p>
+            <p><strong>当前路径:</strong> <span id="current-path"></span></p>
+            <p><strong>服务状态:</strong> <span id="server-status">检查中...</span></p>
+        </div>
+
+        <div class="section">
+            <h3>🔧 基础测试</h3>
+            <a href="/diagnostic" class="test-link">系统诊断页面</a>
+            <a href="/ping" class="test-link">Ping测试</a>
+        </div>
+
+        <div class="section">
+            <h3>📊 @ResponseBody JSON API测试</h3>
+            <a href="/test/simple" class="test-link">简单数据测试</a>
+            <a href="/test/user" class="test-link">用户对象测试</a>
+            <a href="/test/users" class="test-link">用户列表测试</a>
+            <a href="/test/result" class="test-link">Result包装测试</a>
+        </div>
+
+        <div class="section">
+            <h3>🔍 参数测试</h3>
+            <a href="/test/user/123" class="test-link">路径参数测试 (ID: 123)</a>
+            <a href="/test/search?keyword=消防&page=1&size=10" class="test-link">查询参数测试</a>
+        </div>
+
+        <div class="section">
+            <h3>❌ 错误测试</h3>
+            <a href="/test/error/404" class="test-link">404错误测试</a>
+            <a href="/test/error/500" class="test-link">500错误测试</a>
+            <a href="/test/null" class="test-link">null值测试</a>
+        </div>
+
+        <div class="section">
+            <h3>🌐 API接口测试</h3>
+            <a href="/api/users" class="test-link">API用户列表</a>
+            <a href="/api/users/1" class="test-link">API单个用户</a>
+            <a href="/api/status" class="test-link">API状态信息</a>
+        </div>
+
+        <div class="section">
+            <h3>📄 静态资源测试</h3>
+            <a href="/test-responsebody.html" class="test-link">完整测试页面</a>
+            <a href="/index.jsp" class="test-link">首页JSP</a>
+            <a href="/login.jsp" class="test-link">登录页面</a>
+        </div>
+
+        <div class="section">
+            <h3>🔗 HTML响应测试</h3>
+            <a href="/test/html" class="test-link">HTML响应测试</a>
+            <a href="/test/complex" class="test-link">复杂对象测试</a>
+        </div>
+    </div>
+
+    <script>
+        // 更新当前时间
+        function updateTime() {
+            document.getElementById('current-time').textContent = new Date().toLocaleString('zh-CN');
+        }
+
+        // 更新路径信息
+        function updatePath() {
+            document.getElementById('current-path').textContent = window.location.pathname;
+        }
+
+        // 检查服务器状态
+        function checkServerStatus() {
+            fetch('/ping')
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('server-status').innerHTML = '✅ 正常';
+                        document.getElementById('server-status').style.color = 'green';
+                    } else {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('server-status').innerHTML = '❌ 异常: ' + error.message;
+                    document.getElementById('server-status').style.color = 'red';
+                });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function () {
+            updateTime();
+            updatePath();
+            checkServerStatus();
+
+            // 每30秒更新一次时间
+            setInterval(updateTime, 30000);
+        });
+    </script>
+</body>
+
+</html>
