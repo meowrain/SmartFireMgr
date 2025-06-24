@@ -17,8 +17,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <!-- Servlet & JSP API -->
+    <dependencies>        <!-- Servlet & JSP API - 兼容Tomcat 7版本 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -52,26 +51,23 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.2</version>
             <scope>test</scope>
-        </dependency>
-        <!-- Object to Json -->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        </dependency>        <!-- Object to Json - 兼容Java 8和Tomcat 7版本 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.19.1</version>
+            <version>2.9.10</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.19.1</version>
+            <version>2.9.10</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.19.1</version>
+            <version>2.9.10</version>
         </dependency>
+
 
         <!--        日志-->
         <dependency>

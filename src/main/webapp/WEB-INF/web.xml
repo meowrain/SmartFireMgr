@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         id="WebApp_ID" version="4.0">
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+    id="WebApp_ID" version="4.0">
     <display-name>SmartFireFightingSystem</display-name>
+
+    <!-- 注册DispatcherServlet -->
+    <!-- servlet-name: 给这个 Servlet 起名叫 "dispatcher"
+servlet-class: 指定你自己写的 DispatcherServlet 类
+init-param: 初始化参数，告诉 DispatcherServlet 要扫描 com.fire.controller 包下的控制器
+load-on-startup: 值为 1，表示服务器启动时就加载这个 Servlet -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>com.fire.controller.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>scanPackage</param-name>
+            <param-value>com.fire.controller</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

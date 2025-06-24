@@ -6,12 +6,17 @@ public class User {
     private String password;
     private String role;
 
+    // 无参构造器 - MyBatis需要
+    public User() {
+    }
+
     public User(int id, String username, String password, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
     }
+
     // Getters and Setters
     public int getId() {
         return id;
