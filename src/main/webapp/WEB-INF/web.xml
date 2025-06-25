@@ -37,6 +37,6 @@ load-on-startup: 值为 1，表示服务器启动时就加载这个 Servlet -->
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

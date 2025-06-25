@@ -21,6 +21,11 @@ public class AdminDao {
      * 用户ID
      */
     private Long id;
+
+    /**
+     * 电话号码
+     */
+    private String phone;
     /**
      * 用户姓名
      */
@@ -46,6 +51,7 @@ public class AdminDao {
         return name;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -64,6 +70,13 @@ public class AdminDao {
 
     public void setState(String state) {
         this.state = state;
+    }
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

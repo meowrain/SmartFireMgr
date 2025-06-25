@@ -87,6 +87,13 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version> <!-- HikariCP 4.x 兼容 Java 8 -->
+        </dependency>
+
     </dependencies>
 
     <build>
