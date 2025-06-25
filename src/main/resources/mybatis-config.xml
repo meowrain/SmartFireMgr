@@ -16,6 +16,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/fire/mapper/UserMapper.xml"/>
+        <mapper resource="com/xszx/dao/mapper/UserMapper.xml"/>
     </mappers>
 </configuration>

@@ -29,7 +29,7 @@
     <!-- 日志器 -->
     <Loggers>
         <!-- 特定包的日志配置 -->
-        <Logger name="com.fire" level="debug" additivity="false">
+        <Logger name="com.xszx" level="debug" additivity="false">
             <AppenderRef ref="ColorfulConsoleAppender" />
             <AppenderRef ref="FileAppender" />
         </Logger>

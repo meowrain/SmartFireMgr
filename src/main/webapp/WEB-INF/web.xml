@@ -8,14 +8,14 @@
     <!-- 注册DispatcherServlet -->
     <!-- servlet-name: 给这个 Servlet 起名叫 "dispatcher"
 servlet-class: 指定你自己写的 DispatcherServlet 类
-init-param: 初始化参数，告诉 DispatcherServlet 要扫描 com.fire.controller 包下的控制器
+init-param: 初始化参数，告诉 DispatcherServlet 要扫描 com.xszx.controller 包下的控制器
 load-on-startup: 值为 1，表示服务器启动时就加载这个 Servlet -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
-        <servlet-class>com.fire.common.router.core.DispatcherServlet</servlet-class>
+        <servlet-class>com.xszx.common.router.core.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>scanPackage</param-name>
-            <param-value>com.fire.controller</param-value>
+            <param-value>com.xszx.controller</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>    <!-- 为API路径配置多个映射，避免拦截静态资源 -->
