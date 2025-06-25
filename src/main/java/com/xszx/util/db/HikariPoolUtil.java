@@ -1,5 +1,6 @@
 package com.xszx.util.db;
 
+import com.xszx.common.exceptions.ServiceException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -24,12 +25,13 @@ public class HikariPoolUtil {
             hikariConfig.setUsername(prop.getProperty("db.username"));
             hikariConfig.setPassword(prop.getProperty("db.password"));
             hikariConfig.setDriverClassName(prop.getProperty("db.driver"));
+//            hikariConfig.setConnectionTimeout(Long.parseLong(prop.getProperty("db.connectionTimeout")));
             String poolSize = prop.getProperty("db.pool.size");
             hikariConfig.setMaximumPoolSize(Integer.parseInt(poolSize));
             hikariDataSource = new HikariDataSource(hikariConfig);
         }catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("HikariCP initialization failed", e);
+            log.error("HikariCP initialization failed");
+            throw new ServiceException("HikariCP initialization failed");
         }
     }
     public static Connection getConnection() throws SQLException {

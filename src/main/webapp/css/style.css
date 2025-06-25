@@ -12186,6 +12186,10 @@ dl {
 /*-------------------------------------------------------------------*/
 /* === Landing screens === */
 /* Auth */
+div.content-wrapper.auth {
+  background-image: url("../images/auth/wallhaven-q6v6lr.jpg");
+  background-size: cover;
+}
 .auth .login-half-bg {
   background: url("../../images/auth/login-bg.jpg");
   background-size: cover; }

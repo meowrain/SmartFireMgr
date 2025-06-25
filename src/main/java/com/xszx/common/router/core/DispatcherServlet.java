@@ -3,6 +3,7 @@ package com.xszx.common.router.core;
 import com.xszx.common.router.enums.HttpMethod;
 import com.xszx.common.router.handler.HandlerInvoker;
 import com.xszx.common.router.handler.HandlerMethod;
+import com.xszx.common.router.interceptor.AuthInterceptor;
 import com.xszx.common.router.interceptor.GlobalExceptionInterceptor;
 import com.xszx.common.router.interfaces.Controller;
 import com.xszx.common.router.interfaces.RequestMapping;
@@ -42,7 +43,9 @@ public class DispatcherServlet extends HttpServlet {
         // 注册拦截器（类似Gin的中间件）
         this.handlerInvoker.addInterceptor(new CorsInterceptor());
         this.handlerInvoker.addInterceptor(new LoggingInterceptor());
+        this.handlerInvoker.addInterceptor(new AuthInterceptor());
         this.handlerInvoker.addInterceptor(new GlobalExceptionInterceptor());
+
         // 从web.xml获取扫描包路径
         String scanPackage = config.getInitParameter("scanPackage");
 

@@ -1,22 +1,22 @@
 package com.xszx.dto.req.admin;
 
 public class RegisterRequestDTO {
-    private String name;
+    private String username;
     private String password;
     public RegisterRequestDTO() {
 
     }
-    public RegisterRequestDTO(String name, String password) {
-        this.name = name;
+    public RegisterRequestDTO(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public String getPassword() {

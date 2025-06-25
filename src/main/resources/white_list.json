@@ -1,0 +1,9 @@
+{
+  "whitelist": [
+    "/api/admin/login",
+    "/api/admin/register",
+    "/public/**",
+    "/static/**",
+    "/favicon.ico"
+  ]
+}
