@@ -47,13 +47,14 @@
                                         class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                                     登入
                                 </button>
+                                <span id="respMessage"></span>
                             </div>
                             <div class="my-2 d-flex justify-content-between align-items-center">
                                 <div class="form-check">
                                     <label class="form-check-label text-muted">
                                         <input type="checkbox" class="form-check-input"> 保持登录 </label>
                                 </div>
-                                <a href="#" class="auth-link text-white">Forgot password?</a>
+                                <a href="#" class="auth-link text-white">忘记密码?</a>
                             </div>
                             <div class="text-center mt-4 font-weight-light"> 还没有账号？ <a
                                     href="register.jsp" class="text-primary">注册</a>
@@ -69,6 +70,7 @@
 </div>
 <script>
     let loginBtn = document.getElementById("loginBtn");
+    let respMessage = document.getElementById("respMessage");
     loginBtn.addEventListener("click", function () {
         const username = document.getElementById("exampleInputEmail1").value;
         const password = document.getElementById("exampleInputPassword1").value;
@@ -89,11 +91,12 @@
                 console.log("后端返回：", data);
                 console.log(data.code)
                 if (data.code === "0") {
-                    alert("登录成功！");
                     // 例如跳转主页
                     window.location.href = "../../index.jsp";
                 } else {
-                    alert("登录失败：" + (data.message || "未知错误"));
+                    respMessage.innerHTML = "<span class='text-danger'>登录失败：" + (data.message || "未知错误") + "</span>";
+                    <%--respMessage.setHTMLUnsafe("${data.message}");--%>
+                    // alert("登录失败：" + (data.message || "未知错误"));
                 }
             })
             .catch(error => {

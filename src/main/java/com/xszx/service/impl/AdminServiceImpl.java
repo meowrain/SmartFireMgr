@@ -50,11 +50,12 @@ public class AdminServiceImpl implements AdminService {
                 loginResponseDTO.setUsername(admin.getName());
                 loginResponseDTO.setToken(jwtToken);
                 return loginResponseDTO;
+            }else {
+                throw new ServiceException(LOGIN_ERROR_USERNAME_PWD);
             }
         } else {
             throw new ServiceException(LOGIN_ERROR_USERNAME_PWD);
         }
-        return null;
 
     }
 
