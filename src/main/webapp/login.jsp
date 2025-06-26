@@ -16,7 +16,7 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../css/style.css" <!-- End layout styles -->
+    <link rel="stylesheet" href="../../css/style.css"  /><!-- End layout styles -->
     <link rel="shortcut icon" href="../../images/favicon.png"/>
 </head>
 <body>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="mt-3">
                                 <%--                                <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"--%>
-                                <%--                                   href="../../index.html">登入</a>--%>
+                                <%--                                   href="../../index.jsp">登入</a>--%>
                                 <button type="button" id="loginBtn"
                                         class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                                     登入
@@ -91,7 +91,7 @@
                 if (data.code === "0") {
                     alert("登录成功！");
                     // 例如跳转主页
-                    window.location.href = "../../index.html";
+                    window.location.href = "../../index.jsp";
                 } else {
                     alert("登录失败：" + (data.message || "未知错误"));
                 }
