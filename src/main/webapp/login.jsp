@@ -56,7 +56,7 @@
                                 <a href="#" class="auth-link text-white">Forgot password?</a>
                             </div>
                             <div class="text-center mt-4 font-weight-light"> 还没有账号？ <a
-                                    href="register.html" class="text-primary">注册</a>
+                                    href="register.jsp" class="text-primary">注册</a>
                             </div>
                         </form>
                     </div>
