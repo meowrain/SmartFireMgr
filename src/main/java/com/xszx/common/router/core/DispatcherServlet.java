@@ -3,6 +3,7 @@ package com.xszx.common.router.core;
 import com.xszx.common.router.enums.HttpMethod;
 import com.xszx.common.router.handler.HandlerInvoker;
 import com.xszx.common.router.handler.HandlerMethod;
+import com.xszx.common.router.handler.StaticResourceHandler;
 import com.xszx.common.router.interceptor.AuthInterceptor;
 import com.xszx.common.router.interceptor.GlobalExceptionInterceptor;
 import com.xszx.common.router.interfaces.Controller;
@@ -95,7 +96,10 @@ public class DispatcherServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (StaticResourceHandler.handleStaticResource(req, resp)) {
+            return; // 如果是静态资源且已处理，直接返回
+        }
         // 从请求中获取 URI，并去掉上下文路径，得到实际请求路径（如 /user/1）
         String path = req.getRequestURI().substring(req.getContextPath().length());
         // 将 HTTP 方法（如 GET、POST）转为自定义的 HttpMethod 枚举类型

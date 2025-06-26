@@ -2,6 +2,7 @@
   "whitelist": [
     "/api/admin/login",
     "/api/admin/register",
+    "/api/admin",
     "/public/**",
     "/static/**",
     "/favicon.ico"

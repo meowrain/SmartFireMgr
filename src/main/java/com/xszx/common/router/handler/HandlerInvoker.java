@@ -9,6 +9,7 @@ import com.xszx.common.router.handler.resolver.param.ResponseParameterResolver;
 import com.xszx.common.router.handler.resolver.param.RequestBodyParameterResolver;
 import com.xszx.common.router.handler.resolver.param.RequestParamParameterResolver;
 import com.xszx.common.router.handler.resolver.returnvalue.ResponseBodyReturnValueHandler;
+import com.xszx.common.router.handler.resolver.returnvalue.ModelAndViewReturnValueHandler;
 import com.xszx.common.router.handler.resolver.returnvalue.DefaultReturnValueHandler;
 import com.xszx.common.router.interceptor.HandlerInterceptor;
 import org.slf4j.Logger;
@@ -65,6 +66,7 @@ public class HandlerInvoker {
 
         // 注册返回值处理器（注意顺序：优先级高的在前面）
         addReturnValueHandler(new ResponseBodyReturnValueHandler());
+        addReturnValueHandler(new ModelAndViewReturnValueHandler());
         addReturnValueHandler(new DefaultReturnValueHandler());// 默认处理器放最后
     }
 

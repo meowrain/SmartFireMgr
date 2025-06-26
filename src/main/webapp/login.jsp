@@ -92,7 +92,8 @@
                 console.log(data.code)
                 if (data.code === "0") {
                     // 例如跳转主页
-                    window.location.href = "../../index.jsp";
+                    // window.location.href = "../../index.jsp";
+                    window.location.href = "/api/admin"
                 } else {
                     respMessage.innerHTML = "<span class='text-danger'>登录失败：" + (data.message || "未知错误") + "</span>";
                     <%--respMessage.setHTMLUnsafe("${data.message}");--%>

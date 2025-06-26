@@ -16,8 +16,8 @@
           <div class="dot-indicator bg-success"></div>
         </div>
         <div class="text-wrapper">
-          <p class="profile-name">Allen Moreno</p>
-          <p class="designation">Administrator</p>
+          <p class="profile-name">${username}</p>
+          <p class="designation">在线</p>
         </div>
         <div class="icon-container">
           <i class="icon-bubbles"></i>
@@ -25,72 +25,60 @@
         </div>
       </a>
     </li>
-    <li class="nav-item nav-category">
-      <span class="nav-link">Dashboard</span>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="index.html">
-        <span class="menu-title">Dashboard</span>
-        <i class="icon-screen-desktop menu-icon"></i>
-      </a>
-    </li>
+
     <li class="nav-item nav-category"><span class="nav-link">UI Elements</span></li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
          aria-controls="ui-basic">
-        <span class="menu-title">Basic UI Elements</span>
+        <span class="menu-title">设备管理</span>
         <i class="icon-layers menu-icon"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+          <li class="nav-item"><a class="nav-link" href="/equipmentadd.jsp">设备添加</a>
           </li>
           <li class="nav-item"><a class="nav-link"
-                                  href="pages/ui-features/typography.html">Typography</a></li>
+                                  href="pages/ui-features/typography.html">设备列表</a></li>
+          <li class="nav-item"><a class="nav-link"
+                                  href="pages/ui-features/typography.html">设备报修</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="pages/icons/simple-line-icons.html">
-        <span class="menu-title">Icons</span>
+        <span class="menu-title">数据采集与监测</span>
         <i class="icon-globe menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="pages/forms/basic_elements.html">
-        <span class="menu-title">Form Elements</span>
+        <span class="menu-title">日常巡检</span>
         <i class="icon-book-open menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartist.html">
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">应急处理</span>
         <i class="icon-chart menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="pages/tables/basic-table.html">
-        <span class="menu-title">Tables</span>
-        <i class="icon-grid menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
+    <li class="nav-item nav-category"><span class="nav-link">宣传培训</span></li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-        <span class="menu-title">General Pages</span>
+        <span class="menu-title">大屏监测</span>
         <i class="icon-doc menu-icon"></i>
       </a>
-      <div class="collapse" id="auth">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/samples/register.html"> Register </a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank
-            Page </a></li>
-        </ul>
-      </div>
+<%--      <div class="collapse" id="auth">--%>
+<%--        <ul class="nav flex-column sub-menu">--%>
+<%--          <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> 登录 </a></li>--%>
+<%--          <li class="nav-item"><a class="nav-link" href="pages/samples/register.html"> 注册 </a>--%>
+<%--          </li>--%>
+<%--          <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>--%>
+<%--          <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>--%>
+<%--          <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank--%>
+<%--            Page </a></li>--%>
+<%--        </ul>--%>
+<%--      </div>--%>
     </li>
     <li class="nav-item pro-upgrade">
 		  <span class="nav-link">
