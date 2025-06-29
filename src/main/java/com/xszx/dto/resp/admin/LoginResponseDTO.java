@@ -1,4 +1,4 @@
-package com.xszx.dto.resp;
+package com.xszx.dto.resp.admin;
 
 public class LoginResponseDTO {
 

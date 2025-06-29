@@ -2,7 +2,7 @@ package com.xszx.util;
 
 
 import com.xszx.common.exceptions.ServiceException;
-import com.xszx.dao.entity.AdminDao;
+import com.xszx.dao.entity.AdminDAO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -32,7 +32,7 @@ public class JwtUtil {
     /**
      * 生成用户TOKEN
      */
-    public static String generateAccessToken(AdminDao adminDao) {
+    public static String generateAccessToken(AdminDAO adminDao) {
         SecretKeySpec key = createKey(JWT_SECRET);
         Map<String, Object> adminMap = new HashMap<>();
         adminMap.put("username", adminDao.getName());

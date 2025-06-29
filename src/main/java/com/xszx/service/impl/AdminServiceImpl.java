@@ -1,20 +1,17 @@
 package com.xszx.service.impl;
 
 import com.xszx.common.exceptions.ServiceException;
-import com.xszx.dao.entity.AdminDao;
+import com.xszx.dao.entity.AdminDAO;
 import com.xszx.dto.req.admin.LoginRequestDTO;
 import com.xszx.dto.req.admin.RegisterRequestDTO;
-import com.xszx.dto.resp.LoginResponseDTO;
-import com.xszx.dto.resp.RegisterResponseDTO;
+import com.xszx.dto.resp.admin.LoginResponseDTO;
+import com.xszx.dto.resp.admin.RegisterResponseDTO;
 import com.xszx.service.AdminService;
 import com.xszx.util.JwtUtil;
-import com.xszx.util.db.HikariPoolUtil;
 import com.xszx.util.db.JDBCTemplate;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.Cookie;
 
 import static com.xszx.common.errorcode.BaseErrorCode.*;
 
@@ -29,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
 //            Connection connection = HikariPoolUtil.getConnection();
         String sql = "select * from t_admin where name = ?";
         JDBCTemplate jdbcTemplate = new JDBCTemplate();
-        AdminDao admin = jdbcTemplate.queryForObject(sql, AdminDao.class, loginRequestDTO.getUsername());
+        AdminDAO admin = jdbcTemplate.queryForObject(sql, AdminDAO.class, loginRequestDTO.getUsername());
 
 //            PreparedStatement ps = connection.prepareStatement(sql);
 //            ps.setString(1, name);
@@ -66,7 +63,7 @@ public class AdminServiceImpl implements AdminService {
         String rawPassword = registerRequestDTO.getPassword();
         JDBCTemplate jdbcTemplate = new JDBCTemplate();
         String sql = "select * from t_admin where name = ?";
-        AdminDao adminDaoQuery = jdbcTemplate.queryForObject(sql, AdminDao.class, username);
+        AdminDAO adminDaoQuery = jdbcTemplate.queryForObject(sql, AdminDAO.class, username);
         if (adminDaoQuery != null) {
             // 用户已经存在，不允许注册
             throw new ServiceException(REGISTER_ERROR01);
@@ -75,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
         String salt = BCrypt.gensalt(10); // 10 是一个常用且安全的默认值
         //        哈希（加密）密码
         String encrptPassword = BCrypt.hashpw(rawPassword, salt);
-        AdminDao adminDao = new AdminDao();
+        AdminDAO adminDao = new AdminDAO();
         adminDao.setName(username);
         adminDao.setPassword(encrptPassword);
         adminDao.setState("1");

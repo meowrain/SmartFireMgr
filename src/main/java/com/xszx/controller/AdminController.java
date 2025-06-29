@@ -1,9 +1,7 @@
 package com.xszx.controller;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import com.xszx.common.errorcode.BaseErrorCode;
 import com.xszx.common.result.Result;
 import com.xszx.common.result.ResultBuilder;
 import com.xszx.common.router.core.ModelAndView;
@@ -14,8 +12,8 @@ import com.xszx.common.router.interfaces.RequestMapping;
 import com.xszx.common.router.interfaces.ResponseBody;
 import com.xszx.dto.req.admin.LoginRequestDTO;
 import com.xszx.dto.req.admin.RegisterRequestDTO;
-import com.xszx.dto.resp.LoginResponseDTO;
-import com.xszx.dto.resp.RegisterResponseDTO;
+import com.xszx.dto.resp.admin.LoginResponseDTO;
+import com.xszx.dto.resp.admin.RegisterResponseDTO;
 import com.xszx.service.AdminService;
 import com.xszx.service.impl.AdminServiceImpl;
 import org.slf4j.Logger;

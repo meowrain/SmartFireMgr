@@ -3,14 +3,14 @@ package com.xszx.dao.entity;
 /**
  * 管理员实体类
  */
-public class AdminDao {
+public class AdminDAO {
     /**
      * 无参构造器
      */
-    public AdminDao() {
+    public AdminDAO() {
     }
 
-    public AdminDao(Long id, String name, String password, String state) {
+    public AdminDAO(Long id, String name, String password, String state) {
         this.id = id;
         this.name = name;
         this.password = password;
