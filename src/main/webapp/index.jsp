@@ -1,4 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 隆邱豪
+  Date: 2025-06-26
+  Time: 14:59
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,16 +27,21 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="./images/favicon.png"/>
+    <link rel="shortcut icon" href="./images/favicon.png" />
 </head>
 <body>
 
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <jsp:include page="header.jsp" />
+
+    <jsp:include page="header.jsp"></jsp:include>
+
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-    <jsp:include page="sidebar.jsp" />
+        <!-- partial:partials/_sidebar.html -->
+
+        <jsp:include page="left.jsp"></jsp:include>
+
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
@@ -54,9 +66,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-sm-flex align-items-baseline report-summary-header">
-                                            <h5 class="font-weight-semibold">Report Summary</h5> <span class="ml-auto">Updated Report</span>
-                                            <button class="btn btn-icons border-0 p-2"><i class="icon-refresh"></i>
-                                            </button>
+                                            <h5 class="font-weight-semibold">Report Summary</h5> <span class="ml-auto">Updated Report</span> <button class="btn btn-icons border-0 p-2"><i class="icon-refresh"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -113,26 +123,21 @@
                                 <div class="row income-expense-summary-chart-text">
                                     <div class="col-xl-4">
                                         <h5>Income And Expenses Summary</h5>
-                                        <p class="small text-muted">A comparison of people who mark themselves of their
-                                            ineterest from the date range given above. Learn more.</p>
+                                        <p class="small text-muted">A comparison of people who mark themselves of their ineterest from the date range given above. Learn more.</p>
                                     </div>
                                     <div class=" col-md-3 col-xl-2">
-                                        <p class="income-expense-summary-chart-legend"><span
-                                                style="border-color: #6469df"></span> Total Income </p>
+                                        <p class="income-expense-summary-chart-legend"> <span style="border-color: #6469df"></span> Total Income </p>
                                         <h3>$ 1,766.00</h3>
                                     </div>
                                     <div class="col-md-3 col-xl-2">
-                                        <p class="income-expense-summary-chart-legend"><span
-                                                style="border-color: #37ca32"></span> Total Expense </p>
+                                        <p class="income-expense-summary-chart-legend"> <span style="border-color: #37ca32"></span> Total Expense </p>
                                         <h3>$ 5,698.30</h3>
                                     </div>
                                     <div class="col-md-6 col-xl-4 d-flex align-items-center">
                                         <div class="input-group" id="income-expense-summary-chart-daterange">
-                                            <div class="inpu-group-prepend input-group-text"><i
-                                                    class="icon-calendar"></i></div>
+                                            <div class="inpu-group-prepend input-group-text"><i class="icon-calendar"></i></div>
                                             <input type="text" class="form-control">
-                                            <div class="input-group-prepend input-group-text"><i
-                                                    class="icon-arrow-down"></i></div>
+                                            <div class="input-group-prepend input-group-text"><i class="icon-arrow-down"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,8 +159,7 @@
                                     <canvas id="sessionsDoughnutChart" height="210"></canvas>
                                     <div class="wrapper d-flex flex-column justify-content-center absolute absolute-center">
                                         <h2 class="text-center mb-0 font-weight-bold">8.234</h2>
-                                        <small class="d-block text-center text-muted  font-weight-semibold mb-0">Total
-                                            Leads</small>
+                                        <small class="d-block text-center text-muted  font-weight-semibold mb-0">Total Leads</small>
                                     </div>
                                 </div>
                                 <div class="wrapper mt-4 d-flex flex-wrap align-items-cente">
@@ -230,13 +234,9 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <img class="img-sm rounded-circle" src="images/faces/face1.jpg"
-                                                     alt="profile image"> Katie Holmes
-                                            </td>
+                                                <img class="img-sm rounded-circle" src="images/faces/face1.jpg" alt="profile image"> Katie Holmes </td>
                                             <td>$3621</td>
-                                            <td><img src="images/dashboard/alipay.png" alt="alipay"
-                                                     class="gateway-icon mr-2"> alipay
-                                            </td>
+                                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
                                             <td>04 Jun 2019</td>
                                             <td>18 Jul 2019</td>
                                             <td>
@@ -245,13 +245,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img class="img-sm rounded-circle" src="images/faces/face2.jpg"
-                                                     alt="profile image"> Minnie Copeland
-                                            </td>
+                                                <img class="img-sm rounded-circle" src="images/faces/face2.jpg" alt="profile image"> Minnie Copeland </td>
                                             <td>$6245</td>
-                                            <td><img src="images/dashboard/paypal.png" alt="alipay"
-                                                     class="gateway-icon mr-2"> Paypal
-                                            </td>
+                                            <td><img src="images/dashboard/paypal.png" alt="alipay" class="gateway-icon mr-2"> Paypal</td>
                                             <td>25 Sep 2019</td>
                                             <td>07 Oct 2019</td>
                                             <td>
@@ -260,13 +256,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img class="img-sm rounded-circle" src="images/faces/face3.jpg"
-                                                     alt="profile image"> Rodney Sims
-                                            </td>
+                                                <img class="img-sm rounded-circle" src="images/faces/face3.jpg" alt="profile image"> Rodney Sims </td>
                                             <td>$9265</td>
-                                            <td><img src="images/dashboard/alipay.png" alt="alipay"
-                                                     class="gateway-icon mr-2"> alipay
-                                            </td>
+                                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
                                             <td>12 dec 2019</td>
                                             <td>26 Aug 2019</td>
                                             <td>
@@ -275,13 +267,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img class="img-sm rounded-circle" src="images/faces/face4.jpg"
-                                                     alt="profile image"> Carolyn Barker
-                                            </td>
+                                                <img class="img-sm rounded-circle" src="images/faces/face4.jpg" alt="profile image"> Carolyn Barker </td>
                                             <td>$2263</td>
-                                            <td><img src="images/dashboard/alipay.png" alt="alipay"
-                                                     class="gateway-icon mr-2"> alipay
-                                            </td>
+                                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
                                             <td>30 Sep 2019</td>
                                             <td>20 Oct 2019</td>
                                             <td>
@@ -295,14 +283,12 @@
                                     <p class="text-muted">Showing 1 to 10 of 57 entries</p>
                                     <nav class="ml-auto">
                                         <ul class="pagination separated pagination-info">
-                                            <li class="page-item"><a href="#" class="page-link"><i
-                                                    class="icon-arrow-left"></i></a></li>
+                                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
                                             <li class="page-item active"><a href="#" class="page-link">1</a></li>
                                             <li class="page-item"><a href="#" class="page-link">2</a></li>
                                             <li class="page-item"><a href="#" class="page-link">3</a></li>
                                             <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                            <li class="page-item"><a href="#" class="page-link"><i
-                                                    class="icon-arrow-right"></i></a></li>
+                                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -315,11 +301,8 @@
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 2019.Company name All rights reserved.<a
-                            target="_blank"
-                            href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                            class="icon-heart text-danger"></i></span>
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="icon-heart text-danger"></i></span>
                 </div>
             </footer>
             <!-- partial -->
@@ -345,6 +328,6 @@
 <!-- Custom js for this page -->
 <script src="./js/dashboard.js"></script>
 <!-- End custom js for this page -->
-
 </body>
 </html>
+
