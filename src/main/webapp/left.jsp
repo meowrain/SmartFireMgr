@@ -33,8 +33,8 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="equipmentadd.jsp">设备添加</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="GetEquipmentServlet">设备列表</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">设备报修</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="equipmentlist.jsp">设备列表</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="equipmentupdate.jsp">设备报修</a></li>
 
                 </ul>
             </div>

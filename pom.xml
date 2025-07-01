@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xszx</groupId>
@@ -36,14 +36,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
-        </dependency>
-
-        <!-- Mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.9</version>
+            <version>8.0.33</version>
         </dependency>
 
         <!-- JUnit 5 -->
@@ -92,7 +85,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>4.0.3</version> <!-- HikariCP 4.x 兼容 Java 8 -->
+            <version>3.4.5</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
@@ -107,7 +100,6 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>${jwt.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
@@ -115,7 +107,6 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
             <version>${jwt.version}</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

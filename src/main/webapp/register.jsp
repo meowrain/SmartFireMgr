@@ -69,6 +69,7 @@
                           class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                      注册
                   </button>
+                  <span id="respMessage"></span>
               </div>
               <div class="text-center mt-4 font-weight-light">已经有账号了？ <a href="login.jsp" class="text-primary">登录</a>
               </div>
@@ -101,21 +102,16 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log("后端返回：", data);
-                console.log(data.code)
                 if (data.code === "0") {
                     // 例如跳转主页
-                    // window.location.href = "../../index.jsp";
-                    // window.location.href = "/index.jsp"
-                } else {
-                    respMessage.innerHTML = "<span class='text-danger'>登录失败：" + (data.message || "未知错误") + "</span>";
-                    <%--respMessage.setHTMLUnsafe("${data.message}");--%>
-                    // alert("登录失败：" + (data.message || "未知错误"));
+                    window.location.href = "/login.jsp"
+                }else{
+                    respMessage.innerHTML = "<span class='text-danger'>注册失败：" + (data.message || "未知错误") + "</span>";
                 }
             })
             .catch(error => {
                 console.error("请求失败：", error);
-                alert("请求失败，请检查网络或后端服务。");
+
             });
     });
 

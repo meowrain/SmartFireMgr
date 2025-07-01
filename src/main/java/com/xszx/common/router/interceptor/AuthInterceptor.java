@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import static com.xszx.common.errorcode.BaseErrorCode.AUTH_ERROR;
 
-
 public class AuthInterceptor implements HandlerInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(AuthInterceptor.class);
@@ -19,6 +18,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        log.info(request.toString());
         // 获取请求路径
         String requestPath = request.getRequestURI().substring(request.getContextPath().length());
 
@@ -26,21 +26,25 @@ public class AuthInterceptor implements HandlerInterceptor {
             log.info("Request path [{}] 在白名单中，放行.", requestPath);
             // 如果请求路径在白名单中，直接放行
             return true;
-        }else{
+        } else {
             log.info("Request path [{}] 不在白名单中，进行权限验证.", requestPath);
         }
 
         String rawToken = request.getHeader("Authorization");
+        log.info("rawToken [{}]", rawToken);
         if (rawToken == null || !rawToken.startsWith("Bearer ")) {
             log.error("Request path [{}]  请求头中缺少 Authorization 或格式不正确: {}", requestPath, rawToken);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             throw new ServiceException(AUTH_ERROR);
         }
-        // String token = rawToken.substring(7);
+
+        // 提取实际的token（去掉"Bearer "前缀）
+        String token = rawToken.substring(7);
         try {
-            JwtUtil.validateToken(rawToken);
-            log.error("请求头无效: {}", rawToken);
+            JwtUtil.validateToken(token);
+            log.info("Token验证成功: {}", requestPath);
         } catch (Exception e) {
+            log.error("Token验证失败 [{}]: {}", requestPath, e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             throw new ServiceException(AUTH_ERROR);
         }

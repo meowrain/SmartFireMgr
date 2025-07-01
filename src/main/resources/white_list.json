@@ -3,6 +3,8 @@
     "/api/admin/login",
     "/api/admin/register",
     "/api/admin",
+    "/login.jsp",
+    "/register.jsp",
     "/public/**",
     "/static/**",
     "/favicon.ico"
