@@ -65,7 +65,10 @@
 <%--                </div>--%>
 <%--              </div>--%>
               <div class="mt-3">
-                <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">注册</a>
+                  <button type="button" id="registerBtn"
+                          class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                     注册
+                  </button>
               </div>
               <div class="text-center mt-4 font-weight-light">已经有账号了？ <a href="login.jsp" class="text-primary">登录</a>
               </div>
@@ -78,6 +81,45 @@
   </div>
   <!-- page-body-wrapper ends -->
 </div>
+<script>
+    let registerBtn = document.getElementById("registerBtn");
+    let respMessage = document.getElementById("respMessage");
+    registerBtn.addEventListener("click", function () {
+        const username = document.getElementById("exampleInputUsername1").value;
+        const password = document.getElementById("exampleInputPassword1").value;
+        const payload = {
+            username: username,
+            password: password
+        };
+
+        fetch("/api/admin/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("后端返回：", data);
+                console.log(data.code)
+                if (data.code === "0") {
+                    // 例如跳转主页
+                    // window.location.href = "../../index.jsp";
+                    // window.location.href = "/index.jsp"
+                } else {
+                    respMessage.innerHTML = "<span class='text-danger'>登录失败：" + (data.message || "未知错误") + "</span>";
+                    <%--respMessage.setHTMLUnsafe("${data.message}");--%>
+                    // alert("登录失败：" + (data.message || "未知错误"));
+                }
+            })
+            .catch(error => {
+                console.error("请求失败：", error);
+                alert("请求失败，请检查网络或后端服务。");
+            });
+    });
+
+</script>
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="../../vendors/js/vendor.bundle.base.js"></script>

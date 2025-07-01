@@ -72,6 +72,7 @@ public class AdminServiceImpl implements AdminService {
         String salt = BCrypt.gensalt(10); // 10 是一个常用且安全的默认值
         //        哈希（加密）密码
         String encrptPassword = BCrypt.hashpw(rawPassword, salt);
+
         AdminDAO adminDao = new AdminDAO();
         adminDao.setName(username);
         adminDao.setPassword(encrptPassword);

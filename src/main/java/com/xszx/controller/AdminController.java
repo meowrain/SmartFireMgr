@@ -6,10 +6,7 @@ import com.xszx.common.result.Result;
 import com.xszx.common.result.ResultBuilder;
 import com.xszx.common.router.core.ModelAndView;
 import com.xszx.common.router.enums.HttpMethod;
-import com.xszx.common.router.interfaces.Controller;
-import com.xszx.common.router.interfaces.RequestBody;
-import com.xszx.common.router.interfaces.RequestMapping;
-import com.xszx.common.router.interfaces.ResponseBody;
+import com.xszx.common.router.interfaces.*;
 import com.xszx.dto.req.admin.LoginRequestDTO;
 import com.xszx.dto.req.admin.RegisterRequestDTO;
 import com.xszx.dto.resp.admin.LoginResponseDTO;
@@ -64,9 +61,5 @@ public class AdminController {
         return ResultBuilder.success(responseDTO);
     }
 
-    @RequestMapping(path = "/api/admin/greeting", method = HttpMethod.GET)
-    @ResponseBody
-    public String greeting() {
-        return "hello";
-    }
+
 }
