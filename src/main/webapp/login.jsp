@@ -50,7 +50,7 @@
                                             class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                                             --%>
                                             <%-- href="../../index.jsp">登入</a>--%>
-                                                <button type="button" id="loginBtn"
+                                                <button type="submit" id="loginBtn"
                                                     class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                                                     登入
                                                 </button>
