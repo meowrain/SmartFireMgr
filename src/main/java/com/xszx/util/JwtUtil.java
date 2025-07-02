@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,6 +72,66 @@ public class JwtUtil {
             throw new ServiceException(AUTH_ERROR.message(), AUTH_ERROR);
         }
 
+    }
+
+    /**
+     * 从 HttpServletRequest 中获取当前用户ID
+     */
+    public static Integer getCurrentUserId(HttpServletRequest request) {
+        try {
+            String token = request.getHeader("Authorization");
+            if (token == null || !token.startsWith(TOKEN_PREFIX)) {
+                throw new ServiceException("无效的认证信息", AUTH_ERROR);
+            }
+
+            Claims claims = validateToken(token);
+            Object userIdObj = claims.get("id");
+
+            if (userIdObj == null) {
+                throw new ServiceException("用户信息不完整", AUTH_ERROR);
+            }
+
+            // 处理可能的类型转换
+            if (userIdObj instanceof Integer) {
+                return (Integer) userIdObj;
+            } else if (userIdObj instanceof Long) {
+                return ((Long) userIdObj).intValue();
+            } else if (userIdObj instanceof String) {
+                return Integer.parseInt((String) userIdObj);
+            } else {
+                return Integer.parseInt(userIdObj.toString());
+            }
+        } catch (NumberFormatException e) {
+            log.error("用户ID格式错误: {}", e.getMessage());
+            throw new ServiceException("用户信息格式错误", AUTH_ERROR);
+        } catch (Exception e) {
+            log.error("获取当前用户ID失败: {}", e.getMessage());
+            throw new ServiceException("获取用户信息失败", AUTH_ERROR);
+        }
+    }
+
+    /**
+     * 从 HttpServletRequest 中获取当前用户名
+     */
+    public static String getCurrentUsername(HttpServletRequest request) {
+        try {
+            String token = request.getHeader("Authorization");
+            if (token == null || !token.startsWith(TOKEN_PREFIX)) {
+                throw new ServiceException("无效的认证信息", AUTH_ERROR);
+            }
+
+            Claims claims = validateToken(token);
+            String username = (String) claims.get("username");
+
+            if (username == null) {
+                throw new ServiceException("用户信息不完整", AUTH_ERROR);
+            }
+
+            return username;
+        } catch (Exception e) {
+            log.error("获取当前用户名失败: {}", e.getMessage());
+            throw new ServiceException("获取用户信息失败", AUTH_ERROR);
+        }
     }
 
 }

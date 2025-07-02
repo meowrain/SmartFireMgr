@@ -13,6 +13,7 @@ import com.xszx.dto.resp.admin.LoginResponseDTO;
 import com.xszx.dto.resp.admin.RegisterResponseDTO;
 import com.xszx.service.AdminService;
 import com.xszx.service.impl.AdminServiceImpl;
+import com.xszx.util.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,5 +62,10 @@ public class AdminController {
         return ResultBuilder.success(responseDTO);
     }
 
-
+    @RequestMapping(path = "/api/admin/info", method = HttpMethod.GET)
+    @ResponseBody
+    public Result info(HttpServletRequest request) {
+        String username = JwtUtil.getCurrentUsername(request);
+        return ResultBuilder.success(username);
+    }
 }

@@ -9,20 +9,20 @@ import java.util.List;
 public interface EquipmentService {
 
     /**
-     * 获取所有设备列表
+     * 获取当前用户的所有设备列表
      */
-    List<EquipmentDAO> getAllEquipments();
+    List<EquipmentDAO> getAllEquipments(Integer userId);
 
     /**
-     * 根据名称模糊搜索设备
+     * 根据名称模糊搜索当前用户的设备
      */
-    List<EquipmentDAO> searchByName(String equipmentName);
+    List<EquipmentDAO> searchByName(String equipmentName, Integer userId);
 
     void add(EquipmentDAO equipmentDAO);
 
     void update(EquipmentDAO equipmentDAO);
 
-    void delete(Integer id);
+    void delete(Integer id, Integer userId);
 
-    EquipmentDAO getById(Integer id);
+    EquipmentDAO getById(Integer id, Integer userId);
 }

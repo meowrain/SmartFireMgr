@@ -349,7 +349,7 @@
           }, 3000);
         }
       </script>
-
+      <script src="./js/userinfo.js"></script>
       <!-- endinject -->
     </body>
 

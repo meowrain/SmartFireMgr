@@ -1163,7 +1163,8 @@ public class JDBCTemplate {
      */
     private boolean isIdField(String methodName) {
         String fieldName = getFieldNameFromGetter(methodName).toLowerCase();
-        return "id".equals(fieldName) || fieldName.endsWith("id");
+        // 只跳过主键ID字段，不跳过外键ID字段如user_id
+        return "id".equals(fieldName) || "equipmentid".equals(fieldName);
     }
 
     /**

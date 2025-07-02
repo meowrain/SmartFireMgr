@@ -15,7 +15,7 @@
                     <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="profile-name">${name}</p>
+                    <p class="profile-name" id="username-sidebar"></p>
                     <p class="designation">在线</p>
                 </div>
                 <div class="icon-container">

@@ -15,11 +15,14 @@ public class EquipmentDAO {
     private String location;
     private String status;
     private String responsible_person;
+    private Integer user_id; // 新增用户ID字段
 
     public EquipmentDAO() {
     }
 
-    public EquipmentDAO(Integer equipment_id, String equipment_name, String equipment_type, String specification, Date production_date, Date expiry_date, String location, String status, String responsible_person) {
+    public EquipmentDAO(Integer equipment_id, String equipment_name, String equipment_type, String specification,
+            Date production_date, Date expiry_date, String location, String status, String responsible_person,
+            Integer user_id) {
         this.equipment_id = equipment_id;
         this.equipment_name = equipment_name;
         this.equipment_type = equipment_type;
@@ -29,6 +32,7 @@ public class EquipmentDAO {
         this.location = location;
         this.status = status;
         this.responsible_person = responsible_person;
+        this.user_id = user_id;
     }
 
     public Integer getEquipmentId() {
@@ -101,5 +105,13 @@ public class EquipmentDAO {
 
     public void setResponsiblePerson(String responsible_person) {
         this.responsible_person = responsible_person;
+    }
+
+    public Integer getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(Integer user_id) {
+        this.user_id = user_id;
     }
 }

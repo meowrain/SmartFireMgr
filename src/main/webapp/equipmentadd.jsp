@@ -104,16 +104,6 @@
                   </div>
 
 
-                  <div class="form-group">
-                    <label>设备图片</label>
-                    <input type="file" name="img[]" class="file-upload-default">
-                    <div class="input-group col-xs-12">
-                      <input type="file" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                      <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                      </span>
-                    </div>
-                  </div>
 
                   <button type="submit" class="btn btn-primary mr-2">添加</button>
                   <button type="reset" class="btn btn-light">重置</button>
@@ -147,7 +137,7 @@
 
       <!-- 引入认证脚本 -->
       <script src="js/auth.js"></script>
-
+      <script src="./js/userinfo.js"></script>
       <!-- 设备添加页面的API对接脚本 -->
       <script>
         document.addEventListener('DOMContentLoaded', function () {

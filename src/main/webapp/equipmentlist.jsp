@@ -285,7 +285,7 @@
           alert('成功: ' + message);
         }
       </script>
-
+      <script src="./js/userinfo.js"></script>
       <!-- endinject -->
     </body>
 
